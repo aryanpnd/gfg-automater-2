@@ -1,0 +1,33 @@
+{
+  "name": "GFG Automater (Problems and quizes)",
+  "version": "0.1.0",
+  "description": "An automation tool for gfg course's Problems and quizes, developed by aryan",
+  "permissions": ["storage", "tabs", "activeTab", "notifications"],
+  "host_permissions": ["https://*.geeksforgeeks.org/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.geeksforgeeks.org/*"],
+      "js": ["contentScript.js","mainScreenHelper.js","automateBot.js","waitForContentToLoad.js","quizBot.js","problemBot.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["notification.mp3"],
+      "matches": ["https://*.geeksforgeeks.org/*"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "24": "assets/icon48.png",
+      "32": "assets/icon128.png"
+    },
+    "default_title": "GFG Automater (Problems and quizes)",
+    "default_popup": "popup.html"
+  },
+  
+  "manifest_version": 3
+}

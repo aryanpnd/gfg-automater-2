@@ -1,0 +1,103 @@
+*{
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+}
+body{
+  background: #141E30;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 12rem;
+}
+
+
+.start-button {
+  background: #8E2DE2;
+  background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
+  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+  width: 100%;
+  height: 2rem;
+  border-radius: 5px;
+}
+.stop-button {
+  margin-top: 5px;
+  background: #ED213A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100%;
+  height: 2rem;
+  border-radius: 5px;
+}
+
+
+.inactive-body{
+  display: none;
+}
+
+.dropdown-container {
+  position: relative;
+  width: 200px;
+  margin: 20px;
+}
+
+.dropdown-select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  background-color: #fff;
+  color: #333;
+}
+
+.dropdown-select option {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
+  color: #333;
+}
+
+.dropdown-select option:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.dropdown-select option:last-child {
+  border-bottom: none;
+}
+
+.dropdown-placeholder {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #666;
+  pointer-events: none;
+}.dropdown-container {
+  position: relative;
+  width: 200px;
+  margin: 20px;
+}
+
+.dropdown-select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  appearance: none;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+}
