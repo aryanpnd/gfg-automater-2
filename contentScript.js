@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             console.log('Link element not found for href:', href);
           }
         }
-
+        chrome.tabs.sendMessage("moduleEnded")
       } catch (error) {
         console.error('Error waiting for anchor tags:', error);
       }

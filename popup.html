@@ -9,11 +9,19 @@
 <body>
   <div id="body">
     <h1 style="text-align: center;">GFG Automater</h1>
+    <h3 style="text-align: center;">problems and MCQ's</h3>
+    <label for="modulesDropdown">Select a Section</label>
     <select id="modulesDropdown" class="dropdown-select">
-      <option value="d">dasdas</option>
     </select>
-    <button class="start-button" id="scriptStartButton">StartScript</button>
-    <button class="start-button" id="startButton">Start</button>
+    <button class="start-button" id="startButton">Load Sections</button>
+    <button style="display: none;" class="start-button bot" id="scriptStartButton">Start Bot</button>
+  </div>
+
+  <div id="inactive-body">
+    <div >
+      <h2 id="inactive-body-text" style="text-align: center;">Please open the website</h2>
+    </div>
+    <button class="start-button" id="openWebsite">Open</button>
   </div>
 
   <script src="popup.js"></script>
