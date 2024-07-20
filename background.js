@@ -1,7 +1,7 @@
 // background.js
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.message === 'moduleEnded') {
+  if (request.message === 'AllLinksProcessed') {
     chrome.notifications.create({
       type: 'basic',
       iconUrl: 'assets/icon128.png',

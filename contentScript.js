@@ -11,11 +11,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
 
     if (requiredModules.aTags[index] && requiredModules.aTags[index].hrefs.length > 0) {
       try {
-        
         console.log('Anchor tags loaded.');
         
         for (let i = 0; i < requiredModules.aTags[index].hrefs.length; i++) {
-          await waitForContentToLoad(`.left_content__contents`)
+          await waitForContentToLoad(`.left_content__contents`);
           const href = requiredModules.aTags[index].hrefs[i];
           const linkElement = Array.from(document.querySelectorAll('a')).find(a => a.href === href);
 
@@ -30,7 +29,9 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             console.log('Link element not found for href:', href);
           }
         }
-        chrome.tabs.sendMessage("moduleEnded")
+
+        // Notify background script that processing is complete
+        chrome.runtime.sendMessage({ message: 'AllLinksProcessed' });
       } catch (error) {
         console.error('Error waiting for anchor tags:', error);
       }
