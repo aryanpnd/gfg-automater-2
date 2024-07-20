@@ -1,4 +1,4 @@
-function startTheBot() {
+async function startTheBot() {
     console.log("Bot started");
     return lookForSideBar().then(async sideBarData => {
         if (sideBarData.status) {
