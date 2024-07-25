@@ -1,17 +1,27 @@
 async function problemBot() {
     const problemClass = "sidebar_item__khyNp";
+    const targetImageSrc = "https://media.geeksforgeeks.org/img-practice/Group11-1667280519.svg";
+    
     try {
         await waitForContentToLoad(`.${problemClass}`);
         let problems = document.querySelectorAll(`.${problemClass}`);
+        
         for (let problem of problems) {
-            problem.click();
-            await solveProblems()
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Check if the problem contains the target image
+            const imgTag = problem.querySelector('img');
+            if (imgTag && imgTag.src === targetImageSrc) {
+                problem.click();
+                await solveProblems();
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            } else {
+                console.log('Problem does not contain the target image or image src does not match.');
+            }
         }
     } catch (error) {
         console.error("Error in problemBot:", error);
     }
 }
+
 
 async function solveProblems() {
     const menuItemClass = "problems_header_menu__items__BUrou";
@@ -49,48 +59,59 @@ async function solveProblems() {
     }
 }
 
+
 async function moveCodeToEditor() {
     const tableClass = "table";
     const actionsDivClass = "editorialSubmission_confirm_modal__9MeXS";
-    const moveCodeToEditorWindowClass = "prettyprinted"
+    const moveCodeToEditorWindowClass = "prettyprinted";
     const uiIconButtonsContainerClass = "editorialSubmission_copy_content__7nO3a";
 
     try {
         await waitForContentToLoad(`.${tableClass}`);
         const table = document.querySelector(`.${tableClass}`);
         const tbody = table.querySelector('tbody');
-        const firstRow = tbody.querySelector('tr');
-        const lastTd = firstRow.querySelectorAll('td')[firstRow.querySelectorAll('td').length - 1];
-        const anchorTag = lastTd.querySelector('a');
+        
+        // Find the row where the <td> with class "editorialSubmission_right_submsn__sYd_m" contains "Correct"
+        const correctRow = Array.from(tbody.querySelectorAll('tr')).find(row => {
+            const correctTd = row.querySelector('td.editorialSubmission_right_submsn__sYd_m');
+            return correctTd && correctTd.innerHTML.trim() === "Correct";
+        });
 
-        anchorTag.click();
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const WarnActionsDiv = document.querySelector(`.${actionsDivClass}`);
-        if(WarnActionsDiv){
-            const okButton = WarnActionsDiv.querySelectorAll('button')[1]
-            okButton.click();
+        if (correctRow) {
+            const lastTd = correctRow.querySelectorAll('td')[correctRow.querySelectorAll('td').length - 1];
+            const anchorTag = lastTd.querySelector('a');
+
+            anchorTag.click();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const warnActionsDiv = document.querySelector(`.${actionsDivClass}`);
+            if (warnActionsDiv) {
+                const okButton = warnActionsDiv.querySelectorAll('button')[1];
+                okButton.click();
+            }
+            
+            await waitForContentToLoad(`.${moveCodeToEditorWindowClass}`);
+            const uiIconButtonsContainer = document.getElementsByClassName(uiIconButtonsContainerClass);
+            const uiIconButton = uiIconButtonsContainer[0].querySelectorAll('button')[1];
+            uiIconButton.click();
+            
+            const moveActionsDiv = document.querySelector(`.${actionsDivClass}`);
+            if (moveActionsDiv) {
+                const okButton = moveActionsDiv.querySelectorAll('button')[1];
+                okButton.click();
+            }
+            
+            await submitTheCode();
+            return;
+        } else {
+            console.error("No row with 'Correct' status found.");
         }
-        
-        await waitForContentToLoad(`.${moveCodeToEditorWindowClass}`);
-        const uiIconButtonsContainer = document.getElementsByClassName(uiIconButtonsContainerClass);
-        const uiIconButton = uiIconButtonsContainer[0].querySelectorAll('button')[1];
-        uiIconButton.click();
-        
-        const moveActionsDiv = document.querySelector(`.${actionsDivClass}`);
-        if(moveActionsDiv){
-            const okButton = moveActionsDiv.querySelectorAll('button')[1]
-            okButton.click();
-        }
-        
-        await submitTheCode()
-        return
-        
     } catch (error) {
         console.error("Error in moveCodeToEditor:", error);
-        return
+        return;
     }
 }
+
 
 async function submitTheCode(){
     const submitButton = document.getElementsByClassName("problems_submit_button__6QoNQ")[0];

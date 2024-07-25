@@ -3,7 +3,7 @@ async function startTheBot() {
     return lookForSideBar().then(async sideBarData => {
         if (sideBarData.status) {
             await lookForProblemsTab(sideBarData.sidebar);
-            await lookForQuizTab(sideBarData.sidebar);
+            // await lookForQuizTab(sideBarData.sidebar);
             document.getElementsByClassName("sidebar_backTo_home__zEmhy")[0].click()
             return { status: true };
         } else {
